@@ -1,0 +1,30 @@
+{
+    "name": "backbone-cradle",
+    "description": "Backbone.js sync for CouchDB using Cradle",
+    "author": {
+        "name": "Sam Lown",
+        "url": "http://samlown.com/",
+        "email": "me@samlown.com"
+    },
+    "version": "0.1.0",
+    "homepage": "https://github.com/samlown/backbone-cradle",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/samlown/backbone-cradle.git"
+    },
+    "main": "./backbone-cradle",
+    "directories": {
+      "test": "./test"
+    },
+    "engines": {
+        "node": "*"
+    },
+    "dependencies": {
+        "backbone": ">= 0.5.1",
+        "underscore": ">= 1.1.0",
+        "cradle": ">= 0.5.5"
+    },
+    "scripts": {
+        "test": "expresso"
+    }
+}
