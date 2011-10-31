@@ -15,6 +15,11 @@ in the end takes quite a different approach.
 To ensure compatibility with Ruby's CouchRest Model (also maintained by Sam Lown),
 ensure the 'type' column, is always set in your models.
 
+### Changes
+
+* 2011-10-31 - 0.1.1
+ * Upgraded to Cradle 0.5.7
+
 ### Installation
 
     npm install backbone-cradle

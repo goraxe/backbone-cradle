@@ -6,7 +6,7 @@
         "url": "http://samlown.com/",
         "email": "me@samlown.com"
     },
-    "version": "0.1.0",
+    "version": "0.1.1",
     "homepage": "https://github.com/samlown/backbone-cradle",
     "repository": {
         "type": "git",
@@ -22,7 +22,7 @@
     "dependencies": {
         "backbone": ">= 0.5.1",
         "underscore": ">= 1.1.0",
-        "cradle": ">= 0.5.5"
+        "cradle": ">= 0.5.7"
     },
     "scripts": {
         "test": "expresso"

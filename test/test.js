@@ -180,6 +180,7 @@ module.exports = {
       Tasks.fetch({
         success: function() {
           assert.equal(Tasks.length, 10);
+          assert.match(Tasks.first().get('name'), /Task Item/);
         },
         error: function() {
           assert.isNull(true, "Unable to fetch collection");
