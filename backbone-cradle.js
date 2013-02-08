@@ -16,7 +16,7 @@ module.exports = function(cradle, database) {
       var db;
       if (object) {
         if (object instanceof Function) {
-          db = object();
+          db = object.call(this);
         } else if (typeof object === 'string') {
           db = new(cradle.Connection)().database(object);
         } else {
@@ -49,28 +49,46 @@ module.exports = function(cradle, database) {
     var sync = function(method, model, options) {
         var success = options.success || function() {};
         var error = options.error || function() {};
-        var db = getDatabase(model.database);
+        var db = getDatabase.call(model, model.database);
         if (!db) return error(new Error("Model or Collection must have a database!"));
         switch (method) {
         case 'read':
+
             if (model.id) {
               db.get(model.id, function(err, doc) {
                 err ? error(new Error('No results')) : success(doc);
               });
             } else {
-              if (!model.viewName) return error(new Error("Collection must have a viewName property!"));
-              var url = getViewName(model.viewName);
-              // ensure that the include_docs option is always set
-              var data = (options || {})['data'] || { };
-              data.include_docs = true;
-              db.view(url, data, function(err, res) {
-                if (err) return error(err);
-                data = [];
-                res.forEach(function(row) {
-                  data.push(row);
-                });
-                success(data);
-              });
+              if (model.viewName) {
+                  //return error(new Error({ error: "Collection must have a viewName property!"}));
+                  var url = getViewName(model.viewName);
+                  // ensure that the include_docs option is always set
+                  var data = (options || {})['data'] || { };
+                  data.include_docs = true;
+                  db.view(url, data, function(err, res) {
+                    if (err) return error(err);
+                    data = [];
+                    res.forEach(function(row) {
+                      data.push(row);
+                    });
+                    success(data);
+                  });
+              } else {
+                  // ensure that the include_docs option is always set
+                  var data = (options || {})['data'] || { };
+                  data.include_docs = true;
+                  db.all(data, function(err, res) {
+                    if (err) {
+                        return error(err);
+                    }
+                    data = [];
+                    res.forEach(function(row) {
+                      data.push(row);
+                    });
+                    success(data);
+                  });
+              }
+
             }
             break;
         case 'create':
